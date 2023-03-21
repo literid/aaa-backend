@@ -1,13 +1,14 @@
-# Репозиторий к семинару "Основы backend-разработки"
+# Репозиторий с домашним заданием по основам backend
 
-## Что нужно сделать перед семинаром?
-#### Собрать проект на виртуалке
-1. зайти на виртуалку и склонировать на нее склонировать этот репозиторий
-2. выполнить команду `docker build -t ds-backend .`
-3. запустить сервис командой `./run.sh`
-4. открыть в браузере страничку *http://<vm_ip>:8080* и проверить, что выводится слово *"Hello"* 
+Реализованы два handler-а.
+1. readPlateImage - определяет номер с картинки, картинка задается id из определенного пула.
+Route - BASE_URL/readPlateImage/<id>
+2. readPlateImages - делает все тоже что и первый, но можно подать на вход несколько id, используя HTTP-запрос. Например, можно использовать следующий код:
+```python
+import requests
 
-#### Настроить VS Code для удаленного редактирования
-1. установить VS Code на свою машину
-2. установить в VS Code расширение "Remote - SSH" - [инструкция](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) (раздел "Getting started")
-3. открыть проект в VS Code через Remote SSH
+data = {'ids' : ['10022','9965']}
+r = requests.post('BASE_URL/readPlateImages',
+                  json=data)
+print(r.json())
+```
